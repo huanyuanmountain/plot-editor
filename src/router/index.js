@@ -6,12 +6,17 @@ Vue.use(VueRouter)
 const routes = [
     {
         path: '/',
-        redirect: '/home/person'
+        redirect: '/home/info'
     },
     {
         path: '/home',
         component: () => import('../views/Home.vue'),
         children: [
+            {
+                path: 'info',
+                name: 'baseInfoEdit',
+                component: () => import('../components/BaseInfoEdit.vue')
+            },
             {
                 path: 'dialog',
                 name: 'dialogEdit',

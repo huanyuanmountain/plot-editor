@@ -9,17 +9,13 @@
           </template>
 
           <el-menu-item-group>
-            <!-- <el-menu-item index="1-1"> -->
+            <router-link tag="el-menu-item" class="link" to="/home/info">基本信息</router-link>
+
             <router-link tag="el-menu-item" class="link" to="/home/person">人物编辑</router-link>
-            <!-- </el-menu-item> -->
 
-            <!-- <el-menu-item index="1-2"> -->
             <router-link tag="el-menu-item" class="link" to="/home/dialog">对话编辑</router-link>
-            <!-- </el-menu-item> -->
 
-            <!-- <el-menu-item index="1-2"> -->
             <router-link tag="el-menu-item" class="link" to="/home/event">事件编辑</router-link>
-            <!-- </el-menu-item> -->
           </el-menu-item-group>
         </el-submenu>
       </el-menu>
