@@ -17,7 +17,7 @@ export default new Vuex.Store({
             state.fileName = fileName
         },
         changeAuthor(state, author) {
-            state.author = author
+            state.plotData.author = author
         }
     },
 })

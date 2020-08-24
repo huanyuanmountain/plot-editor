@@ -1,6 +1,6 @@
 <template>
   <el-aside>
-    <el-col :span="12">
+    <el-col :span="24">
       <el-menu default-active="2" class :default-openeds="['1']">
         <el-submenu index="1">
           <template slot="title">
@@ -47,14 +47,7 @@ export default {
 </script>
   
 <style>
-.el-menu {
-  padding: 0;
-}
-.el-submenu .el-menu-item,
-.el-menu-item {
-  min-width: 50px;
-}
-.el-menu-item {
-  padding: 0;
+.el-aside {
+  width: 160px !important;
 }
 </style>

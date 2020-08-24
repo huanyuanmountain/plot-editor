@@ -40,28 +40,13 @@ export default {
 </script>
 
 <style scoped>
-/*整体显示区域布局样式*/
 .el-container {
   height: 100%;
 }
 .el-main {
   padding: 0;
 }
-/*左边导航栏具体样式*/
-.el-menu-vertical-demo.el-menu {
-  padding-left: 20px;
-  text-align: left;
-  height: 100%;
-  padding: 0;
-}
 el-container > .el-menu-vertical-demo.el-menu {
-  padding: 0;
-}
-.el-submenu .el-menu-item,
-.el-menu-item {
-  min-width: 30px;
-}
-.el-menu-item {
   padding: 0;
 }
 </style>
