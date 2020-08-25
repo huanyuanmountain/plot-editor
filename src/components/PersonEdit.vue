@@ -22,20 +22,30 @@
 
       <el-table-column label="名称">
         <template slot-scope="scope">
-          <el-input @input="changeName" :value="scope.row.name" placeholder="人物名称" clearable></el-input>
+          <el-input
+            @input="handleChangeName($event, scope.$index)"
+            :value="scope.row.name"
+            placeholder="人物名称"
+            clearable
+          ></el-input>
         </template>
       </el-table-column>
 
       <el-table-column label="头像路径">
         <template slot-scope="scope">
-          <el-input @input="changeName" :value="scope.row.avatar" placeholder="头像 url" clearable></el-input>
+          <el-input
+            @input="handleChangeAvatar($event, scope.$index)"
+            :value="scope.row.avatar"
+            placeholder="头像 url"
+            clearable
+          ></el-input>
         </template>
       </el-table-column>
 
       <el-table-column label="删除">
         <template slot-scope="scope">
           <el-button
-            @click="removePerson(scope)"
+            @click="removePerson(scope.$index)"
             type="danger"
             icon="el-icon-delete-solid"
             size="mini"
@@ -57,7 +67,21 @@ export default {
     })
   },
   methods: {
-    ...mapMutations(['addPersonToList', 'changeName', 'changeAvatar', 'removePerson'])
+    ...mapMutations(['addPersonToList', 'changePersonName', 'changeAvatar', 'removePerson']),
+    handleChangeName(target, index) {
+      const parm = {
+        index,
+        target
+      }
+      this.changePersonName(parm)
+    },
+    handleChangeAvatar(target, index) {
+      const parm = {
+        index,
+        target
+      }
+      this.changeAvatar(parm)
+    },
   }
 
 }

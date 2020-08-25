@@ -35,14 +35,17 @@ export default new Vuex.Store({
         changePersonList(state, parm) {
             state.playerList[parm.index].role = parm.role
         },
-        removePerson() {
-
+        removePerson(state, index) {
+            state.plotData.person.splice(index, 1)
+            state.plotData.person.forEach((el, i) => el.id = String(i + 1))
         },
-        changeName() {
-
+        changePersonName(state, parm) {
+            const { target, index } = parm
+            state.plotData.person[index].name = target
         },
-        changeAvatar() {
-
+        changeAvatar(state, parm) {
+            const { target, index } = parm
+            state.plotData.person[index].avatar = target
         }
     },
 })
