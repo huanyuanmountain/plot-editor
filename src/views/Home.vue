@@ -12,7 +12,7 @@
       </el-container>
     </el-main>
 
-    <el-footer style="border-top: 1px solid gray"></el-footer>
+    <el-footer></el-footer>
   </el-container>
 </template>
 
@@ -44,9 +44,12 @@ export default {
   height: 100%;
 }
 .el-main {
-  padding: 0;
+  padding: 5px;
 }
 el-container > .el-menu-vertical-demo.el-menu {
   padding: 0;
+}
+.el-footer {
+  border-top: 1px solid rgb(64, 158, 255);
 }
 </style>
