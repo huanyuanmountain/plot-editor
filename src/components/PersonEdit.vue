@@ -6,7 +6,6 @@
       <el-col :span="5">
         <el-button
           @click="addPersonToList"
-          class="button"
           type="primary"
           icon="el-icon-circle-plus"
           size="mini"
@@ -15,21 +14,32 @@
     </el-row>
 
     <el-table :data="personList">
-      <el-table-column label="编号">
+      <el-table-column label="编号 id">
         <template slot-scope="scope">
           <span>{{ scope.row.id }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column label="名称" width="110">
+      <el-table-column label="名称">
         <template slot-scope="scope">
-          <span>{{ scope.row.name }}</span>
+          <el-input @input="changeName" :value="scope.row.name" placeholder="人物名称" clearable></el-input>
         </template>
       </el-table-column>
 
-      <el-table-column label="头像 Url">
+      <el-table-column label="头像路径">
         <template slot-scope="scope">
-          <span>{{ scope.row.avatar }}</span>
+          <el-input @input="changeName" :value="scope.row.avatar" placeholder="头像 url" clearable></el-input>
+        </template>
+      </el-table-column>
+
+      <el-table-column label="删除">
+        <template slot-scope="scope">
+          <el-button
+            @click="removePerson(scope)"
+            type="danger"
+            icon="el-icon-delete-solid"
+            size="mini"
+          >删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -47,7 +57,7 @@ export default {
     })
   },
   methods: {
-    ...mapMutations(['addPersonToList'])
+    ...mapMutations(['addPersonToList', 'changeName', 'changeAvatar', 'removePerson'])
   }
 
 }

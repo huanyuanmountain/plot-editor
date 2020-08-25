@@ -24,8 +24,9 @@ export default new Vuex.Store({
             state.plotData.version = version
         },
         addPersonToList(state) {
+            const id = state.plotData.person.length + 1
             const personItem = {
-                id: '',
+                id: id,
                 name: '',
                 avatar: ''
             }
@@ -34,5 +35,14 @@ export default new Vuex.Store({
         changePersonList(state, parm) {
             state.playerList[parm.index].role = parm.role
         },
+        removePerson() {
+
+        },
+        changeName() {
+
+        },
+        changeAvatar() {
+
+        }
     },
 })
