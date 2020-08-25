@@ -23,13 +23,16 @@ export default new Vuex.Store({
         changeVersion(state, version) {
             state.plotData.version = version
         },
-        addPerson(state) {
+        addPersonToList(state) {
             const personItem = {
                 id: '',
                 name: '',
                 avatar: ''
             }
             state.plotData.person.push(personItem)
-        }
+        },
+        changePersonList(state, parm) {
+            state.playerList[parm.index].role = parm.role
+        },
     },
 })
