@@ -22,16 +22,6 @@ import PAside from '../components/PAside'
 
 export default {
   name: "Home",
-  data() {
-    return {
-    }
-  },
-  computed: {
-
-  },
-  methods: {
-
-  },
   components: {
     PHeader,
     PAside
@@ -45,9 +35,6 @@ export default {
 }
 .el-main {
   padding: 5px;
-}
-el-container > .el-menu-vertical-demo.el-menu {
-  padding: 0;
 }
 .el-footer {
   border-top: 1px solid rgb(64, 158, 255);
