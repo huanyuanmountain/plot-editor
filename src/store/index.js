@@ -6,6 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         fileName: 'plotConfig',
+        currentSelectingPlotId: '',
         plotData: {
             author: '不是剑客',
             version: '0.0.1',
@@ -46,6 +47,21 @@ export default new Vuex.Store({
         changeAvatar(state, parm) {
             const { target, index } = parm
             state.plotData.person[index].avatar = target
+        },
+        addPlot(state) {
+            const id = 'rd_' + Math.floor(Math.random() * 10000)
+            const item = {
+                id,
+                name: '',
+                type: '',
+                event: [],
+                dialog: [],
+            }
+            state.plotData.plot[id] = item
+            // console.log(state.plotData.plot)
+        },
+        removePlot(state, id) {
+            delete state.plotData.plot[id]
         }
     },
 })
