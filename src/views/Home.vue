@@ -12,19 +12,23 @@
       </el-container>
     </el-main>
 
-    <el-footer>不是上帝遗忘了我们， 而是我们抛弃了上帝。</el-footer>
+    <el-footer>
+      <p-footer></p-footer>
+    </el-footer>
   </el-container>
 </template>
 
 <script>
 import PHeader from '../components/PHeader'
 import PAside from '../components/PAside'
+import PFooter from '../components/PFooter'
 
 export default {
   name: "Home",
   components: {
     PHeader,
-    PAside
+    PAside,
+    PFooter
   }
 }
 </script>

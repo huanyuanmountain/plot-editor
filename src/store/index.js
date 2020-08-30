@@ -114,6 +114,26 @@ export default new Vuex.Store({
             const plotId = state.currentSelectingPlotId
             const dialogArr = state.plotData.plot[plotId].dialog
             dialogArr[index].dialog = content
+        },
+
+        changeDialogId(state, parm) {
+            const { oldId, newId } = parm
+            const newPlot = {}
+            const oldPlot = state.plotData.plot
+            const oldKeyList = Object.keys(oldPlot)
+
+            oldKeyList.forEach(k => {
+                if (k !== oldId) {
+                    newPlot[k] = oldPlot[k]
+                } else {
+                    const item = oldPlot[oldId]
+                    item.id = newId
+                    newPlot[newId] = item
+                }
+            })
+
+            state.plotData.plot = newPlot
+            state.currentSelectingPlotId = newId
         }
     },
 })

@@ -48,8 +48,20 @@
           <el-col :span="5">
             <el-button @click="addDialog" type="info" icon="el-icon-circle-plus" size="mini">增加一条对话</el-button>
           </el-col>
-          <el-col :span="10">
-            <el-tag type="success" size="small" effect="light">剧情 id：{{currentSelectingPlotId}}</el-tag>
+          <el-col :span="4">
+            <div style="font-size:10px; margin-top:8px;color:gray;">Σ( ° △ °|||)</div>
+          </el-col>
+          <el-col :span="3" id="plot-id-title">剧情 id：</el-col>
+          <el-col :span="5">
+            <el-input
+              @input="handleChangePlotId"
+              v-model="willChangePlotId"
+              size="mini"
+              placeholder="请输入剧情 id"
+            ></el-input>
+          </el-col>
+          <el-col :span="3">
+            <el-button @click="handleConfirmChangeId" type="primary" size="mini">修改</el-button>
           </el-col>
         </el-row>
 
@@ -77,6 +89,8 @@
                 @input="handleChangeDialogContent($event, scope.$index)"
                 :value="scope.row.dialog"
                 placeholder="对话内容"
+                type="textarea"
+                autosize
                 clearable
               ></el-input>
             </template>
@@ -108,6 +122,7 @@ export default {
       idList: [],
       currentPlot: {},
       currentDialog: [],
+      willChangePlotId: ''
     }
   },
 
@@ -138,7 +153,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations(['addPlot', 'removePlot', 'selectPlot', 'addDialog', 'removeDialog', 'changeDialogPerson', 'changeDialogContent']),
+    ...mapMutations(['addPlot', 'removePlot', 'selectPlot', 'addDialog', 'removeDialog', 'changeDialogPerson', 'changeDialogContent', 'changeDialogId']),
 
     handleAddPlot() {
       this.addPlot()
@@ -152,6 +167,7 @@ export default {
 
     handleSelectPlot(id) {
       this.selectPlot(id)
+      this.willChangePlotId = id
       this.refreshData()
     },
 
@@ -171,9 +187,22 @@ export default {
       this.changeDialogContent(parm)
     },
 
+    handleChangePlotId(id) {
+      this.willChangePlotId = id
+    },
+
+    handleConfirmChangeId() {
+      const parm = {
+        oldId: this.currentSelectingPlotId,
+        newId: this.willChangePlotId
+      }
+      this.changeDialogId(parm)
+      this.refreshData()
+    },
+
     refreshData() {
       this.idList = Object.keys(this.plot)
-
+      this.willChangePlotId = this.currentSelectingPlotId
       if (this.currentSelectingPlotId) {
         this.currentDialog = this.plot[this.currentSelectingPlotId].dialog
       }
@@ -187,6 +216,12 @@ export default {
 #plot-id-tag {
   width: 80%;
   margin-top: 6px;
+}
+#plot-id-title {
+  margin-top: 5px;
+  width: unset;
+  font-size: 13px;
+  color: gray;
 }
 .search-layer {
   margin: 5px;
