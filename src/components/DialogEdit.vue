@@ -41,26 +41,42 @@
         </el-row>
       </el-aside>
 
-      <el-main>
+      <el-divider id="split-line" direction="vertical"></el-divider>
+
+      <el-main v-if="currentSelectingPlotId">
         <el-row>
           <el-col :span="5">
             <el-button @click="addDialog" type="info" icon="el-icon-circle-plus" size="mini">增加一条对话</el-button>
           </el-col>
+          <el-col :span="10">
+            <el-tag type="success" size="small" effect="light">剧情 id：{{currentSelectingPlotId}}</el-tag>
+          </el-col>
         </el-row>
 
-        <el-table :data="currentPlot.dialog">
+        <el-table :data="currentDialog">
           <el-table-column label="人物">
             <template slot-scope="scope">
-              <span>{{ scope.row.id }}</span>
+              <el-select
+                :value="scope.row.personId"
+                @change="handleSelectPerson($event, scope.$index)"
+                placeholder="选择人物"
+              >
+                <el-option
+                  v-for="item in personSelectOption"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                ></el-option>
+              </el-select>
             </template>
           </el-table-column>
 
           <el-table-column label="对话">
             <template slot-scope="scope">
               <el-input
-                @input="handleChangeName($event, scope.$index)"
-                :value="scope.row.name"
-                placeholder="人物名称"
+                @input="handleChangeDialogContent($event, scope.$index)"
+                :value="scope.row.dialog"
+                placeholder="对话内容"
                 clearable
               ></el-input>
             </template>
@@ -69,7 +85,7 @@
           <el-table-column label="删除">
             <template slot-scope="scope">
               <el-button
-                @click="removePerson(scope.$index)"
+                @click="removeDialog(scope.$index)"
                 type="danger"
                 icon="el-icon-delete-solid"
                 size="mini"
@@ -90,15 +106,27 @@ export default {
   data() {
     return {
       idList: [],
-      currentPlot: {}
+      currentPlot: {},
+      currentDialog: [],
     }
   },
 
   computed: {
     ...mapState(['currentSelectingPlotId']),
     ...mapState({
-      plot: state => state.plotData.plot
+      plot: state => state.plotData.plot,
+      personList: state => state.plotData.person,
     }),
+
+    personSelectOption() {
+      return this.personList.map(el => {
+        const item = {
+          value: el.id,
+          label: el.name
+        }
+        return item
+      })
+    }
   },
 
   watch: {
@@ -110,7 +138,7 @@ export default {
   },
 
   methods: {
-    ...mapMutations(['addPlot', 'removePlot', 'selectPlot', 'addDialog']),
+    ...mapMutations(['addPlot', 'removePlot', 'selectPlot', 'addDialog', 'removeDialog', 'changeDialogPerson', 'changeDialogContent']),
 
     handleAddPlot() {
       this.addPlot()
@@ -124,11 +152,31 @@ export default {
 
     handleSelectPlot(id) {
       this.selectPlot(id)
+      this.refreshData()
+    },
+
+    handleSelectPerson(selectTarget, index) {
+      const parm = {
+        index,
+        personId: selectTarget
+      }
+      this.changeDialogPerson(parm)
+    },
+
+    handleChangeDialogContent(inputTarget, index) {
+      const parm = {
+        index,
+        content: inputTarget
+      }
+      this.changeDialogContent(parm)
     },
 
     refreshData() {
       this.idList = Object.keys(this.plot)
-      this.currentPlot = this.plot[this.currentSelectingPlotId]
+
+      if (this.currentSelectingPlotId) {
+        this.currentDialog = this.plot[this.currentSelectingPlotId].dialog
+      }
     }
 
   }
@@ -146,5 +194,9 @@ export default {
 #search-title {
   margin-top: 5px;
   font-size: 13px;
+}
+#split-line {
+  height: unset;
+  background-color: rgb(102, 178, 255);
 }
 </style>

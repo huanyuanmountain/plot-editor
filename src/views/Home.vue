@@ -12,7 +12,7 @@
       </el-container>
     </el-main>
 
-    <el-footer></el-footer>
+    <el-footer>不是上帝遗忘了我们， 而是我们抛弃了上帝。</el-footer>
   </el-container>
 </template>
 
