@@ -6,12 +6,20 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         fileName: 'plotConfig',
-        currentSelectingPlotId: '',
+        currentSelectingPlotId: 'empty-1',
         plotData: {
             author: '不是剑客',
             version: '0.0.1',
             person: [],
-            plot: {}
+            plot: {
+                'empty-1': {
+                    id: 'empty-1',
+                    name: '',
+                    type: '',
+                    event: [],
+                    dialog: [],
+                }
+            }
         }
     },
     mutations: {
@@ -60,8 +68,24 @@ export default new Vuex.Store({
             state.plotData.plot[id] = item
             // console.log(state.plotData.plot)
         },
+        selectPlot(state, id) {
+            state.currentSelectingPlotId = id
+        },
         removePlot(state, id) {
             delete state.plotData.plot[id]
+        },
+        addDialog(state) {
+
+            const id = state.currentSelectingPlotId
+            const dialogItem = {
+                personId: '0',
+                dialog: ''
+            }
+            if (id) {
+                state.plotData.plot[id].dialog.push(dialogItem)
+            } else {
+                // todo: 弹窗，请先选择一段剧情
+            }
         }
     },
 })

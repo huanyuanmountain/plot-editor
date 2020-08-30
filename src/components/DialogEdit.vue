@@ -33,12 +33,51 @@
           <el-tag
             id="plot-id-tag"
             size="medium"
-            effect="plain"
+            :effect="currentSelectingPlotId == id ? 'light':'plain'"
             @close="handleRemovePlot(id)"
+            @click="handleSelectPlot(id)"
             closable
           >{{ '剧情 '+ id }}</el-tag>
         </el-row>
       </el-aside>
+
+      <el-main>
+        <el-row>
+          <el-col :span="5">
+            <el-button @click="addDialog" type="info" icon="el-icon-circle-plus" size="mini">增加一条对话</el-button>
+          </el-col>
+        </el-row>
+
+        <el-table :data="currentPlot.dialog">
+          <el-table-column label="人物">
+            <template slot-scope="scope">
+              <span>{{ scope.row.id }}</span>
+            </template>
+          </el-table-column>
+
+          <el-table-column label="对话">
+            <template slot-scope="scope">
+              <el-input
+                @input="handleChangeName($event, scope.$index)"
+                :value="scope.row.name"
+                placeholder="人物名称"
+                clearable
+              ></el-input>
+            </template>
+          </el-table-column>
+
+          <el-table-column label="删除">
+            <template slot-scope="scope">
+              <el-button
+                @click="removePerson(scope.$index)"
+                type="danger"
+                icon="el-icon-delete-solid"
+                size="mini"
+              >删除</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-main>
     </el-container>
   </div>
 </template>
@@ -50,7 +89,8 @@ export default {
   name: 'dialogEdit',
   data() {
     return {
-      idList: []
+      idList: [],
+      currentPlot: {}
     }
   },
 
@@ -66,24 +106,29 @@ export default {
   },
 
   mounted() {
-    this.refreshIdList()
+    this.refreshData()
   },
 
   methods: {
-    ...mapMutations(['addPlot', 'removePlot']),
+    ...mapMutations(['addPlot', 'removePlot', 'selectPlot', 'addDialog']),
 
     handleAddPlot() {
       this.addPlot()
-      this.refreshIdList()
+      this.refreshData()
     },
 
     handleRemovePlot(id) {
       this.removePlot(id)
-      this.refreshIdList()
+      this.refreshData()
     },
 
-    refreshIdList() {
+    handleSelectPlot(id) {
+      this.selectPlot(id)
+    },
+
+    refreshData() {
       this.idList = Object.keys(this.plot)
+      this.currentPlot = this.plot[this.currentSelectingPlotId]
     }
 
   }
