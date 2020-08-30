@@ -29,7 +29,7 @@
 
 <script>
 import { uploadJsonFile, downloadJsonFile } from '../assets/js/fileHelper'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   name: '',
@@ -48,6 +48,7 @@ export default {
   },
 
   methods: {
+    ...mapMutations(['loadConfig']),
     handleDownloadConfig() {
       const content = JSON.stringify(this.plotData)
       downloadJsonFile(content, this.fileName)
@@ -55,7 +56,10 @@ export default {
 
     handleUploadConfig() {
       uploadJsonFile()
-        .then()
+        .then(res => {
+          // console.log(typeof res)
+          this.loadConfig(JSON.parse(res))
+        })
     }
 
   }

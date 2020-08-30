@@ -1,0 +1,60 @@
+{
+    "person": [
+        {
+            "id": "0",
+            "name": "旁白",
+            "avatar": "avatar/aside"
+        },
+        {
+            "id": "1",
+            "name": "剑客",
+            "avatar": "avatar/jianke"
+        },
+        {
+            "id": "2",
+            "name": "文学少女",
+            "avatar": "avatar/gyd"
+        },
+        {
+            "id": "3",
+            "name": "牛头人部长",
+            "avatar": "avatar/niutouren"
+        },
+        {
+            "id": "4",
+            "name": "盯裆猫",
+            "avatar": "avatar/dingdang"
+        }
+    ],
+    "plot": {
+        "0": {
+            "id": "0",
+            "dialogs": [
+                {
+                    "personId": "0",
+                    "dialog": "大家好，我是旁白，下面有请剑客给大家带来一段剧情表演，大家鼓掌欢迎！"
+                },
+                {
+                    "personId": "1",
+                    "dialog": "今天的风儿甚是喧嚣。"
+                },
+                {
+                    "personId": "2",
+                    "dialog": "这风儿似有略略欲泣。"
+                },
+                {
+                    "personId": "1",
+                    "dialog": "风把不详的东西吹到镇子里去了。"
+                },
+                {
+                    "personId": "2",
+                    "dialog": "快走吧，在风停止之前。"
+                },
+                {
+                    "personId": "4",
+                    "dialog": "喂！不得了了！，那边薯片半价阿！！！"
+                }
+            ]
+        }
+    }
+}

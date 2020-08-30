@@ -204,7 +204,7 @@ export default {
       this.idList = Object.keys(this.plot)
       this.willChangePlotId = this.currentSelectingPlotId
       if (this.currentSelectingPlotId) {
-        this.currentDialog = this.plot[this.currentSelectingPlotId].dialog
+        this.currentDialog = this.plot[this.currentSelectingPlotId].dialogs
       }
     }
 

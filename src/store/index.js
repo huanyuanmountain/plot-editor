@@ -23,6 +23,16 @@ export default new Vuex.Store({
         }
     },
     mutations: {
+        loadConfig(state, config) {
+            if (!config.author) {
+                config.author = '不是剑客'
+            }
+            if (!config.version) {
+                config.version = '0.0.1'
+            }
+            state.plotData = config
+        },
+
         changeFileName(state, fileName) {
             state.fileName = fileName
         },
@@ -71,7 +81,7 @@ export default new Vuex.Store({
                 name: '',
                 type: '',
                 event: [],
-                dialog: [],
+                dialogs: [],
             }
             state.plotData.plot[id] = item
             // console.log(state.plotData.plot)
@@ -93,26 +103,26 @@ export default new Vuex.Store({
                 dialog: ''
             }
 
-            state.plotData.plot[id].dialog.push(dialogItem)
+            state.plotData.plot[id].dialogs.push(dialogItem)
         },
 
         removeDialog(state, index) {
             const id = state.currentSelectingPlotId
-            const dialogArr = state.plotData.plot[id].dialog
+            const dialogArr = state.plotData.plot[id].dialogs
             dialogArr.splice(index, 1)
         },
 
         changeDialogPerson(state, parm) {
             const { index, personId } = parm
             const plotId = state.currentSelectingPlotId
-            const dialogArr = state.plotData.plot[plotId].dialog
+            const dialogArr = state.plotData.plot[plotId].dialogs
             dialogArr[index].personId = personId
         },
 
         changeDialogContent(state, parm) {
             const { index, content } = parm
             const plotId = state.currentSelectingPlotId
-            const dialogArr = state.plotData.plot[plotId].dialog
+            const dialogArr = state.plotData.plot[plotId].dialogs
             dialogArr[index].dialog = content
         },
 
